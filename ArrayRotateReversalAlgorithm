@@ -1,0 +1,20 @@
+// java.util.* and java.util.streams.* have been imported for this problem.
+// You don't need any other imports.
+
+public static int[] rotateLeft(int[] arr, int k) {
+    k = k%arr.length;
+    swap(arr, 0, k-1);
+    swap(arr,k,arr.length-1);
+    swap(arr,0,arr.length-1);
+    return arr;
+}
+
+public static void swap(int[] arr, int start, int end){
+    while(start < end){
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+}
