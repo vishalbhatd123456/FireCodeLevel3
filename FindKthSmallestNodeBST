@@ -1,0 +1,15 @@
+ public TreeNode findKthSmallest(TreeNode root, int k) {                   
+        if(root == null) return null;
+        int leftSize=0;
+        if(root.left != null) {
+            leftSize = size(root.left);
+        }
+        if(leftSize+1 == k) { 
+            return root;
+        } else if(k <= leftSize) {
+            return findKthSmallest(root.left, k);
+        }
+        else {
+            return findKthSmallest(root.right, k-leftSize-1);//find k-leftSize-1 smallest in right subtree.
+        }
+    }
