@@ -1,0 +1,32 @@
+public TreeNode decompressTree(String str){
+    if(str == null || str.equals("") || str.equals("*")) return null;
+    else {
+        ArrayList<Integer> nodes = new ArrayList<>();
+        String[] splits = str.split(",");
+        for(String s: splits){
+            Integer i = s.equals("*") ? null : Integer.valueOf(s);
+            nodes.add(i);
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        int i = 0, size = nodes.size();
+        TreeNode root = new TreeNode(nodes.get(0));
+        queue.add(root);
+        while(i < nodes.size()){
+            TreeNode t = queue.poll();
+            if(t == null){
+                i+=2;
+                continue;
+            } else {
+                Integer leftVal = i+1 < size ? nodes.get(i+1) : null;
+                Integer rightVal = i+2 < size ? nodes.get(i+2) : null;
+                TreeNode leftChild = leftVal != null ? new TreeNode(leftVal) : null;
+                TreeNode rightChild = rightVal != null ? new TreeNode(rightVal) : null;
+                t.left = leftChild; t.right = rightChild;
+                queue.add(leftChild);
+                queue.add(rightChild);
+                i+=2;
+            }
+        }
+        return root;
+    }
+}
