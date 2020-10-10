@@ -1,0 +1,16 @@
+// java.util.* and java.util.streams.* have been imported for this problem.
+// You don't need any other imports.
+
+public ListNode reverseList(ListNode head) {
+    if(head == null || head.next == null){
+        return head;
+    }
+    
+    ListNode startNode = reverseList(head.next);
+    ListNode revList = head.next;
+    revList.next = head;
+    head.next = null;
+    
+    return startNode;
+
+}
