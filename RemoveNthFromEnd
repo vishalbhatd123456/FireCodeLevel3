@@ -1,0 +1,39 @@
+public ListNode removeNthFromEnd(ListNode head, int n) {   
+     if(head == null || head.next == null) return null;
+      int length = 0, nth = 0, pos = 0;
+      ListNode curr = head, prev = null, newHead = head;
+      //get list length
+      while(curr != null) {
+          length++;
+          curr = curr.next;
+      }
+      //get nth node position in the list
+      nth = length-n+1;        
+      //remove nth node
+      curr = head; //reset head
+      while (curr != null) {
+          pos++;
+          //nth node found
+          if(pos == nth) {
+              //remove nth node                
+              if(pos == 1) {
+                  //case: head                    
+                  head = curr.next;
+                  curr.next = null;
+                  newHead = head;
+              } else 
+              if(pos == length) {
+                  //case: tail
+                  prev.next = null;                        
+              } else {
+                  //case: middle                    
+                  prev.next = curr.next;                       
+                  curr.next = null;
+              }                                
+              break;
+          }
+          prev = curr;
+          curr = curr.next;
+      }        
+      return newHead;
+  }
