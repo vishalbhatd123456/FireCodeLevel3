@@ -1,0 +1,20 @@
+public ListNode removeDuplicates(ListNode head) {    
+      Hashtable<Integer,ListNode> nodeTable = new Hashtable<Integer,ListNode>();
+      if(head == null || head.next == null) return head;
+      ListNode curr = head, prev = curr;
+      while(curr != null) {
+          //Found duplicate
+          if(nodeTable.containsKey(curr.data)) {
+              prev.next = curr.next;
+              curr.next = null;
+              curr = prev.next;
+              if(curr == null) break; //reached end of the list
+              nodeTable.put(curr.data, curr);                
+          } else {
+              nodeTable.put(curr.data, curr);                  
+          }            
+          prev = curr;
+          curr = curr.next;                        
+      }        
+      return head;
+  }
